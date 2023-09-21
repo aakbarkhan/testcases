@@ -27,3 +27,8 @@
 - click the settings
 - update the address and the comments one by one.
 - 
+
+get the method where I can close and open the browser
+method-
+with the browser - check the browser if it is open.
+

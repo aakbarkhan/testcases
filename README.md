@@ -7,3 +7,15 @@
 - ### check the routes 🛩️
 - 404 page and click on the back button
   - cookies preset but just one cookie.
+  ### log in to the page
+- go the hope page.
+- select the form
+- fill the form
+- select the login btn
+- click the log in btn
+-  💯
+-  if fails check, pass then see the dashboard
+- username and password
+
+#once the user is successful, check the cookies name
+- so by checking the cookies, is it possible to reopen the same browser without relog in.
