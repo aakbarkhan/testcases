@@ -22,7 +22,8 @@ async function performLogin(username, password) {
   const loginSuccessful = await page.evaluate(() => {
     return document.querySelector('.menu') !== null;
   });
-
+  const metrics = await page.metrics();
+  console.info(metrics);
   // Close the browser
   await browser.close();
 
