@@ -13,6 +13,7 @@ var puppeteer = require('puppeteer');
     // await page.type('.search-box__input', 'automate',  {
     //     delay: 300
     // });
+    // accepting cookies.
     try {
         await page.goto('http://localhost:7000');
 
@@ -59,6 +60,7 @@ var puppeteer = require('puppeteer');
         console.log(err)
     }
 
+    // checking for the login successful or not
     try {
         await page.goto('http://localhost:7000');
         // fill the username and password in the id field
@@ -98,7 +100,7 @@ var puppeteer = require('puppeteer');
     } catch(err){
         console.log(err)
     }
-
+// checking if the user is still logged in 
     try {
         await page.goto('http://localhost:7000/logged_in');
         const cookies = await page.cookies();

@@ -26,6 +26,6 @@
 ## check the setting for admin and the regular user.
 - click the settings
 - update the address and the comments one by one.
+  
+- events and promises
 - 
-
-
