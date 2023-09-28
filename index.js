@@ -14,57 +14,57 @@ var puppeteer = require('puppeteer');
     //     delay: 300
     // });
     // accepting cookies.
-    try {
-        await page.goto('http://localhost:7000');
+    // try {
+    //     await page.goto('http://localhost:7000');
 
-        const cookeSelector = '#accept_cookies';
-        await page.waitForSelector(cookeSelector);
-        console.log(cookeSelector);
+    //     const cookeSelector = '#accept_cookies';
+    //     await page.waitForSelector(cookeSelector);
+    //     console.log(cookeSelector);
 
-        await page.click(cookeSelector)
-        await new Promise(r => setTimeout(r, 1000))
-        const cookies = await page.cookies();
-        // console.log(cookies)
-        if(cookies.length > 0){
-            console.log('we have found the cookies 😄.')
-        } else {
-            console.log('no cookies on this page')
-        }
+    //     await page.click(cookeSelector)
+    //     await new Promise(r => setTimeout(r, 1000))
+    //     const cookies = await page.cookies();
+    //     // console.log(cookies)
+    //     if(cookies.length > 0){
+    //         console.log('we have found the cookies 😄.')
+    //     } else {
+    //         console.log('no cookies on this page')
+    //     }
 
-    } catch(err) {
-        console.log('error on accepting cookies.')
-    }
+    // } catch(err) {
+    //     console.log('error on accepting cookies.')
+    // }
 
 
     //invalid route/url/path, the check for the 404 page.
-    try {
-        await page.goto('http://localhost:7000/time');
-        await new Promise(r => setTimeout(r, 1000))
+    // try {
+    //     await page.goto('http://localhost:7000/time');
+    //     await new Promise(r => setTimeout(r, 1000))
 
-        const notFound = '.links>h2';
-        await page.waitForSelector(notFound);
+    //     const notFound = '.links>h2';
+    //     await page.waitForSelector(notFound);
 
-        const notfoundSelector = await page.$(notFound)
-        const not = await notfoundSelector?.evaluate(e =>e.textContent)
-        console.log(not,"not")
-        if(not) {
-            // select the tag
-            const mainPageTag = '.links>a';
-            // waiting for the tag to appear
-            await page.waitForSelector(mainPageTag);
-            await page.click(mainPageTag)
-            console.log('going to the main page successful 😄.')
-            await new Promise(r => setTimeout(r, 1000))
-        }
-    } catch(err) {
-        console.log(err)
-    }
+    //     const notfoundSelector = await page.$(notFound)
+    //     const not = await notfoundSelector?.evaluate(e =>e.textContent)
+    //     console.log(not,"not")
+    //     if(not) {
+    //         // select the tag
+    //         const mainPageTag = '.links>a';
+    //         // waiting for the tag to appear
+    //         await page.waitForSelector(mainPageTag);
+    //         await page.click(mainPageTag)
+    //         console.log('going to the main page successful 😄.')
+    //         await new Promise(r => setTimeout(r, 1000))
+    //     }
+    // } catch(err) {
+    //     console.log(err)
+    // }
 
     // checking for the login successful or not
     try {
         await page.goto('http://localhost:7000');
         // fill the username and password in the id field
-        await new Promise(r => setTimeout(r, 3000))
+        await new Promise(r => setTimeout(r, 1000))
 
         await page.type('#username', 'Aku');
         await page.type('#password', 'Developer@292')
@@ -88,7 +88,7 @@ var puppeteer = require('puppeteer');
                 return document.querySelector('.menu') != null;
             })
             console.log(loginSuccess, 'hello user')
-            await new Promise(r => setTimeout(r, 10000))
+            await new Promise(r => setTimeout(r, 1000))
             if(loginSuccess){
                 const cookies = await page.cookies();
                 console.log('User succesfully login 💯. from the home page, checkin');
@@ -117,6 +117,47 @@ var puppeteer = require('puppeteer');
         console.log(err);
     }
 
+    // click the setting button.
+    try {
+        await page.goto('http://localhost:7000/logged_in');
+        
+        await page.click('.img_setting');
+        await page.waitForSelector('#userAddress')
+        await new Promise(r => setTimeout(r, 1000))
+        const address = await page.evaluate(()=>{
+            return document.querySelector('#userAddress') != null;
+        })
+        console.log(address)
+        if(address){
+            //update comment and address.
+            // select all the text content make it empty, both for comment and address.
+           
+        //    await page.evaluate(()=>{
+        //     const addressInput = document.querySelector('#userAddress');
+        //     const commentInput = document.querySelector('#comments');
+        //     addressInput.value = "";
+        //     commentInput.value = "";
+        // })
+       
+        await new Promise(r => setTimeout(r, 1000))
+        
+            await page.type('#userAddress', "Hello ");
+            await page.type('#comments', 'this ');
+            await new Promise(r => setTimeout(r, 2000))
+            await page.click('#submit');
+            await new Promise(r => setTimeout(r, 2000))
+            await page.click('a')
+            await new Promise(r => setTimeout(r, 2000))
+            await page.waitForSelector('.menu')
+            // await page.click('.menu>a:nth-child(2)')
+            const logoutElement = '.menu > p:nth-child(2) > a:nth-child(1)';
+            await page.click(logoutElement, console.log('logout sucessful'))
+            await new Promise(r => setTimeout(r, 2000))
+
+        }
+    } catch(err){
+        console.log(err)
+    }
 
     
 
