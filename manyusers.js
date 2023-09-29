@@ -14,20 +14,25 @@ async function performLogin(username, password) {
 
   // Click the login button
   await page.click('#submit')
+  let total=0;
+  let initial = performance.now();
 
   // Wait for the login process to complete
   await page.waitForSelector('.menu')
 
-  // Check if login was successful (you'll need to adapt this to your specific website)
+  // Check if login was successful 
   const loginSuccessful = await page.evaluate(() => {
     return document.querySelector('.menu') !== null;
   });
+  total = performance.now() - initial;
+
+  // web matices
   const metrics = await page.metrics();
   console.info(metrics);
   // Close the browser
   await browser.close();
 
-  return loginSuccessful;
+  return {loginSuccessful,total};
 }
 
 // Create an array of login tasks
